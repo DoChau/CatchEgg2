@@ -17,7 +17,7 @@
   import { BoxGeometry, MeshStandardMaterial, Group } from 'three'
   import { clamp } from 'three/src/math/MathUtils'
   import Egg from '$lib/egg.svelte'
-  import Bunny from '$lib/glass_bunny.svelte'
+  import Bunny from '$lib/cute_bunny.svelte'
   const dispatchingComponent = forwardEventHandlers()
 
   export let position: Vector3 | undefined = undefined
