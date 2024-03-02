@@ -25,7 +25,7 @@
   }
 
   const getRandomPosition = () => {
-    return new Vector3((Math.random()-0.5)*50, (Math.random()-0.5)*50 , 0)
+    return new Vector3((Math.random()-0.5)*50, (Math.random()-0.55)*50 , 0)
   }
 
   const getRandomRotation = () => {

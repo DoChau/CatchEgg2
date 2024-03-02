@@ -20,7 +20,7 @@ Title: Cute Bunny
 
   import { Color, MeshPhysicalMaterial, type BufferGeometry } from 'three'
   import { onDestroy } from 'svelte'
-  const body = new Color(0xFFFFFF)
+  const body = new Color(0x588AEB)
   const eye = new Color(0x219FDA)
   let material1 = new MeshPhysicalMaterial({
     color: body,
