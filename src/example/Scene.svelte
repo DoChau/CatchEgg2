@@ -104,8 +104,8 @@
   isBackground={true}
   format="hdr"
   groundProjection={{ radius: 40, height: 5, scale: { x: 100, y: 100, z: 100 } }}
-/>
--->
+/>-->
+
 <!-- Equirectangular jpg envmap -->
 <Environment
   path="../static/assets/"
@@ -113,10 +113,7 @@
   isBackground={true}
 />
 
-<Float
-  rotationIntensity={0.15}
-  rotationSpeed={2}
->
+
 <T.PerspectiveCamera
   makeDefault
   position={[0, 0, 30]}
@@ -127,10 +124,10 @@
 >
   <OrbitControls 
     enableZoom={false}
-    enableRotate={true} 
+    enableRotate={false} 
   />
 </T.PerspectiveCamera>
-</Float>
+
 
 <T.DirectionalLight
   intensity={2}
@@ -138,7 +135,6 @@
   castShadow
   shadow.bias={-0.0001}
 />
-<T.AmbientLight intensity={0.3} />
 
 <Debug/>
 
