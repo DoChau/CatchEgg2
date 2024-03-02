@@ -26,7 +26,6 @@ Title: Cute Bunny
     color: body,
     reflectivity: 1,
     metalness: 0.9,
-    opacity: 0.2,
     roughness: 0
   })
 

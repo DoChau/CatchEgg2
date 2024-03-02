@@ -104,11 +104,11 @@
   isBackground={true}
   format="hdr"
   groundProjection={{ radius: 40, height: 5, scale: { x: 100, y: 100, z: 100 } }}
-/>-->
-
+/>
+-->
 <!-- Equirectangular jpg envmap -->
 <Environment
-  path="/static/assets/"
+  path="./static/assets/"
   files="bg rock.jpg"
   isBackground={true}
 />
