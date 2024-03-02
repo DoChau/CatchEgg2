@@ -25,7 +25,7 @@
   }
 
   const getRandomPosition = () => {
-    return new Vector3((Math.random()-0.5)*40, (Math.random()-0.5)*40 , 10)
+    return new Vector3((Math.random()-0.5)*50, (Math.random()-0.5)*50 , 0)
   }
 
   const getRandomRotation = () => {
@@ -119,7 +119,7 @@
 >
 <T.PerspectiveCamera
   makeDefault
-  position={[0, 0, 40]}
+  position={[0, 0, 30]}
   fov={90}
     on:create={({ ref }) => {
       ref.lookAt(0, 0, 0)
@@ -135,7 +135,7 @@
 
 <T.DirectionalLight
   intensity={2}
-  position={[-5, 20, -20]}
+  position={[0, 0, 50]}
   castShadow
   shadow.bias={-0.0001}
 />
