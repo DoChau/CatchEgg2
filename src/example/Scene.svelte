@@ -25,11 +25,11 @@
   }
 
   const getRandomPosition = () => {
-    return new Vector3((Math.random()*(30-0 + 1))-30, (Math.random()*(20-0 + 1))-20 , 10)
+    return new Vector3((Math.random()-0.5)*40, (Math.random()-0.5)*40 , 10)
   }
 
   const getRandomRotation = () => {
-    return new Euler(0, -2.9, 0)
+    return new Euler(0, 0, 0)
   }
   type Body = {
       id: string
@@ -109,7 +109,7 @@
 <!-- Equirectangular jpg envmap -->
 <Environment
   path="../static/assets/"
-  files="bg rock.png"
+  files="bg rock.jpg"
   isBackground={true}
 />
 
@@ -119,7 +119,7 @@
 >
 <T.PerspectiveCamera
   makeDefault
-  position={[-5, 10, -20]}
+  position={[0, 0, 40]}
   fov={90}
     on:create={({ ref }) => {
       ref.lookAt(0, 0, 0)
@@ -127,7 +127,7 @@
 >
   <OrbitControls 
     enableZoom={false}
-    enableRotate={false} 
+    enableRotate={true} 
   />
   <AudioListener />
 </T.PerspectiveCamera>
