@@ -25,7 +25,7 @@
   }
 
   const getRandomPosition = () => {
-    return new Vector3((Math.random()-0.5)*50, (Math.random()-0.55)*50 , 0)
+    return new Vector3((Math.random()-0.5)*60, (Math.random()-0.5)*30 , 0)
   }
 
   const getRandomRotation = () => {
@@ -129,7 +129,6 @@
     enableZoom={false}
     enableRotate={true} 
   />
-  <AudioListener />
 </T.PerspectiveCamera>
 </Float>
 
@@ -145,9 +144,9 @@
 
 <!--Drop fake Egg-->
 <Float
-  speed={5}
+  speed={6}
   floatIntensity={1}
-  floatingRange={[-3, 3]} 
+  floatingRange={[-2, 2]} 
   >
   {#each bodies as body (body.id)}
     <Particle on:click={miss}

@@ -4,7 +4,6 @@
   import { World } from '@threlte/rapier'
   import { muted } from './Particle.svelte'
   import Scene from './Scene.svelte'
-  import { Pane, Button } from 'svelte-tweakpane-ui'
 
 	type State = 'start' | 'playing' | 'paused' | 'won' | 'lost'
 
@@ -80,18 +79,6 @@
 {/if}
 
 {#if state === 'playing'}
-
-  <Pane
-    title="Rigid Body"
-    position="fixed"
-  >
-    <Button
-      title="toggle sound"
-      on:click={() => {
-        $muted = !$muted
-      }}
-    />
-  </Pane>
 
   <div>
     <Canvas>

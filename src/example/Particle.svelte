@@ -10,12 +10,9 @@
 
 <script lang="ts">
   import { T, forwardEventHandlers, useFrame } from '@threlte/core'
-  import { PositionalAudio, useGltf } from '@threlte/extras'
-  import { Collider, RigidBody, type ContactEvent } from '@threlte/rapier'
   import { writable } from 'svelte/store'
   import type { Euler, Vector3 } from 'three'
   import { BoxGeometry, MeshStandardMaterial, Group } from 'three'
-  import { clamp } from 'three/src/math/MathUtils'
   import Bunny from '$lib/cute_bunny.svelte'
   const dispatchingComponent = forwardEventHandlers()
 
@@ -41,14 +38,6 @@
     }
   })
 
-  const fireSound = (e: ContactEvent) => {
-    if ($muted) return
-    const volume = clamp((e.detail.totalForceMagnitude - 30) / 1100, 0.1, 1)
-    const audio = audios.find((a) => a.volume >= volume)
-    audio?.stop?.()
-    audio?.play?.()
-  }
-
   $: rotationCasted = rotation?.toArray() as [x: number, y: number, z: number]
   
 </script>
@@ -58,24 +47,5 @@
   position={position?.toArray()}
   rotation={rotationCasted}
 >
-    {#each audios as audio}
-      <PositionalAudio
-        autoplay={false}
-        detune={600 - Math.random() * 1200}
-        bind:stop={audio.stop}
-        bind:play={audio.play}
-        src={audio.source}
-        volume={audio.volume}
-      />
-    {/each}
-
-    <!--
-    <T.Mesh 
-      castShadow
-      receiveShadow
-      {geometry}
-      {material}
-    />
-    -->
-    <Bunny/>
+  <Bunny/>
 </T.Group>
