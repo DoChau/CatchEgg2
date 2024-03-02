@@ -26,7 +26,14 @@
   const gltf = useGltf<{
     nodes: Record<Nodes, Mesh>
     materials: {}
-  }>('/static/assets/cute_bunny.glb', {
+  }>('/static/assets/coelho_bunny.glb', {
+    useDraco: true
+  })
+  
+  const Bg = useGltf<{
+    nodes: Record<Nodes, Mesh>
+    materials: {}
+  }>('/static/assets/randomness.glb', {
     useDraco: true
   })
 
@@ -120,7 +127,6 @@
     {/if}
   {/each}
 {/if}
-
 
 {#if !isDelay}
   <Particle on:click={catched}
