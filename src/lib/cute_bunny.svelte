@@ -26,14 +26,15 @@ Title: Cute Bunny
     color: body,
     reflectivity: 1,
     metalness: 0.9,
+    opacity: 0.2,
     roughness: 0
   })
 
   let material2 = new MeshPhysicalMaterial({
     color: eye,
-    reflectivity: .2,
+    reflectivity: 1,
     metalness: 0.9,
-    roughness: 0.2
+    roughness: 0
   })
   onDestroy(() => {
     material1.dispose(),

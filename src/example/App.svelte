@@ -97,7 +97,10 @@
     <Canvas>
       <World>
 		
-        <Scene on:won = {(e) => {gameWon()}} />
+        <Scene 
+          on:won = {(e) => {gameWon()}} 
+          on:lose = {(e) => {gameLost()}}
+          />
 
         <HTML
           slot="fallback"

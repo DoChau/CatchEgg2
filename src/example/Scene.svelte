@@ -8,8 +8,13 @@
   import Particle from './Particle.svelte'
   import Ground from './Ground.svelte'
   let dispatch = createEventDispatcher()
+  let dispatch2 = createEventDispatcher()
+
   const catched = () => {
         dispatch('won')
+    }
+  const miss = () => {
+        dispatch2('lose')
     }
   const { target } = interactivity()
   
@@ -20,11 +25,11 @@
   }
 
   const getRandomPosition = () => {
-    return new Vector3((Math.random()*(20-0 + 1))-10, (Math.random()*(20-0 + 1))-10 , (Math.random()*(20-0 + 1))-10)
+    return new Vector3((Math.random()*(30-0 + 1))-30, (Math.random()*(20-0 + 1))-20 , 10)
   }
 
   const getRandomRotation = () => {
-    return new Euler(Math.random() * 10, Math.random() * 10, Math.random() * 10)
+    return new Euler(0, -2.9, 0)
   }
   type Body = {
       id: string
@@ -32,6 +37,7 @@
       position: Vector3
       rotation: Euler
     }
+  let size = 12
   let bodies: Body[] = []
   let lastBodyMounted: number = 0
   let bodyEveryMilliseconds = 1000
@@ -91,6 +97,22 @@
   })
 </script>
 
+<!-- Equirectangular hdr envmap 
+<Environment
+  path="/static/assets/"
+  files="puresky_4k.hdr"
+  isBackground={true}
+  format="hdr"
+  groundProjection={{ radius: 40, height: 5, scale: { x: 100, y: 100, z: 100 } }}
+/>-->
+
+<!-- Equirectangular jpg envmap -->
+<Environment
+  path="/static/assets/"
+  files="bg rock.jpg"
+  isBackground={true}
+/>
+
 <Float
   rotationIntensity={0.15}
   rotationSpeed={2}
@@ -125,11 +147,12 @@
 
 <!--Drop fake Egg-->
 <Float
-    rotationIntensity={2.25}
-    rotationSpeed={2}
+  speed={5}
+  floatIntensity={1}
+  floatingRange={[-3, 3]} 
   >
   {#each bodies as body (body.id)}
-    <Particle
+    <Particle on:click={miss}
       position={body.position}
       rotation={body.rotation}
     />
@@ -138,8 +161,9 @@
 
 <!--Drop prize Egg-->
 <Float
-    rotationIntensity={2.25}
-    rotationSpeed={2}
+  speed={5}
+  floatIntensity={1}
+  floatingRange={[-3, 3]}   
   >
   {#if !isDelay}
     <Particle on:click={catched}
