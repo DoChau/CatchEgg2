@@ -109,7 +109,7 @@
 <!-- Equirectangular jpg envmap -->
 <Environment
   path="../static/assets/"
-  files="bg rock.jpg"
+  files="bg rock-01.jpg"
   isBackground={true}
 />
 
