@@ -1,12 +1,11 @@
 <script lang="ts">
   import { onMount, createEventDispatcher } from "svelte";
-  import { T } from '@threlte/core'
-  import { OrbitControls, AudioListener, interactivity, Environment } from '@threlte/extras'
+  import { T, useTask } from '@threlte/core'
+  import { OrbitControls, AudioListener, interactivity, Environment, Float } from '@threlte/extras'
   import { Debug } from '@threlte/rapier'
   import { Euler, Vector3 } from 'three'
 
   import Particle from './Particle.svelte'
-  import Emitter from './Emitter.svelte'
   import Ground from './Ground.svelte'
   let dispatch = createEventDispatcher()
   const catched = () => {
@@ -14,29 +13,6 @@
     }
   const { target } = interactivity()
   
-  import Stars from './Stars.svelte'
-
-  
-  //Float
-  import { Float, Grid, useGltf } from '@threlte/extras'
-  import type { Mesh } from 'three'
-  import Blob from './Blob.svelte'
-  type Nodes = 'ball-1' | 'ball-2' | 'ball-3' | 'ball-4' | 'ball-5'
-
-  const gltf = useGltf<{
-    nodes: Record<Nodes, Mesh>
-    materials: {}
-  }>('/static/assets/coelho_bunny.glb', {
-    useDraco: true
-  })
-  
-  const Bg = useGltf<{
-    nodes: Record<Nodes, Mesh>
-    materials: {}
-  }>('/static/assets/randomness.glb', {
-    useDraco: true
-  })
-
 
   //Drop the Easter Egg
   const getId = () => {
@@ -44,7 +20,7 @@
   }
 
   const getRandomPosition = () => {
-    return new Vector3(0.5 - Math.random() * 1, 5 - Math.random() * 1 + 10, 0.5 - Math.random() * 1)
+    return new Vector3((Math.random()*(20-0 + 1))-10, (Math.random()*(20-0 + 1))-10 , (Math.random()*(20-0 + 1))-10)
   }
 
   const getRandomRotation = () => {
@@ -56,6 +32,11 @@
       position: Vector3
       rotation: Euler
     }
+  let bodies: Body[] = []
+  let lastBodyMounted: number = 0
+  let bodyEveryMilliseconds = 1000
+  let longevityMilliseconds = 8000
+
   const body: Body = {
         id: getId(),
         position: getRandomPosition(),
@@ -79,6 +60,35 @@
 		}
 	}
   //End of drop Easter Egg
+
+  //Create fake Egg
+  useTask(() => {
+    if (lastBodyMounted + bodyEveryMilliseconds < Date.now()) {
+      const body: Body = {
+        id: getId(),
+        mounted: Date.now(),
+        position: getRandomPosition(),
+        rotation: getRandomRotation()
+      }
+      bodies.unshift(body)
+      lastBodyMounted = Date.now()
+      bodies = bodies
+    }
+    const deleteIds: string[] = []
+    bodies.forEach((body) => {
+      if (body.mounted + longevityMilliseconds < Date.now()) {
+        deleteIds.push(body.id)
+      }
+    })
+
+    if (deleteIds.length) {
+      deleteIds.forEach((id) => {
+        const index = bodies.findIndex((body) => body.id === id)
+        if (index !== -1) bodies.splice(index, 1)
+      })
+      bodies = bodies
+    }
+  })
 </script>
 <Environment
   path="/hdr/"
@@ -91,11 +101,15 @@
 >
 <T.PerspectiveCamera
   makeDefault
-  position={[10, 10, 10]}
+  position={[-5, 10, -20]}
+  fov={90}
+    on:create={({ ref }) => {
+      ref.lookAt(0, 0, 0)
+    }}
 >
   <OrbitControls 
     enableZoom={false}
-    enableRotate={true} 
+    enableRotate={false} 
   />
   <AudioListener />
 </T.PerspectiveCamera>
@@ -103,34 +117,38 @@
 
 <T.DirectionalLight
   intensity={2}
-  position={[10, 10, 10]}
+  position={[-5, 20, -20]}
   castShadow
   shadow.bias={-0.0001}
 />
 <T.AmbientLight intensity={0.3} />
 
-<Grid
-  position.y={-10}
-  sectionThickness={1}
-  infiniteGrid
-  cellColor="#dddddd"
-  sectionColor="#ffffff"
-  sectionSize={10}
-  cellSize={2}
-/>
+<Debug/>
 
+<Ground/>
 
-{#if $gltf}
-  {#each Object.values($gltf.nodes) as node}
-    {#if node.geometry}
-      <Blob geometry={node.geometry} />
-    {/if}
-  {/each}
-{/if}
-
-{#if !isDelay}
-  <Particle on:click={catched}
+<!--Drop fake Egg-->
+<Float
+    rotationIntensity={2.25}
+    rotationSpeed={2}
+  >
+  {#each bodies as body (body.id)}
+    <Particle
       position={body.position}
       rotation={body.rotation}
     />
-{/if}
+  {/each}
+</Float>
+
+<!--Drop prize Egg-->
+<Float
+    rotationIntensity={2.25}
+    rotationSpeed={2}
+  >
+  {#if !isDelay}
+    <Particle on:click={catched}
+        position={body.position}
+        rotation={body.rotation}
+      />
+  {/if}
+</Float>

@@ -20,17 +20,17 @@ Title: Cute Bunny
 
   import { Color, MeshPhysicalMaterial, type BufferGeometry } from 'three'
   import { onDestroy } from 'svelte'
-  const red = new Color(0xfe3d00)
-  const blue = new Color(0x0000ff)
+  const body = new Color(0xFACFE1)
+  const eye = new Color(0x219FDA)
   let material1 = new MeshPhysicalMaterial({
-    color: red,
+    color: body,
     reflectivity: 1,
-    metalness: 0.9,
-    roughness: 0.2
+    metalness: 0.2,
+    roughness: 0.01
   })
 
   let material2 = new MeshPhysicalMaterial({
-    color: blue,
+    color: eye,
     reflectivity: .2,
     metalness: 0.9,
     roughness: 0.2
@@ -49,9 +49,13 @@ Title: Cute Bunny
   {:then gltf}
     <T.Mesh geometry={gltf.nodes.Object_4.geometry} 
       material={material1}
+      scale={2}
+
     />
     <T.Mesh geometry={gltf.nodes.Object_5.geometry} 
       material={material2} 
+      scale={2}
+
     />
   {:catch error}
     <slot name="error" {error} />

@@ -16,7 +16,6 @@
   import type { Euler, Vector3 } from 'three'
   import { BoxGeometry, MeshStandardMaterial, Group } from 'three'
   import { clamp } from 'three/src/math/MathUtils'
-  import Egg from '$lib/egg.svelte'
   import Bunny from '$lib/cute_bunny.svelte'
   const dispatchingComponent = forwardEventHandlers()
 
@@ -59,10 +58,6 @@
   position={position?.toArray()}
   rotation={rotationCasted}
 >
-  <RigidBody
-    type={'dynamic'}
-    on:contact={fireSound}
-  >
     {#each audios as audio}
       <PositionalAudio
         autoplay={false}
@@ -74,12 +69,6 @@
       />
     {/each}
 
-    <Collider
-      contactForceEventThreshold={30}
-      restitution={0.4}
-      shape={'ball'}
-      args={[1, 1, 1]}
-    />
     <!--
     <T.Mesh 
       castShadow
@@ -89,5 +78,4 @@
     />
     -->
     <Bunny/>
-  </RigidBody>
 </T.Group>
