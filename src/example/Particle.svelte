@@ -36,7 +36,7 @@
       play: undefined,
       stop: undefined,
       volume: (i + 2) / 10,
-      source: `/audio/ball_bounce_${i + 1}.mp3`
+      source: `../static/assets/ping.mp3`
     }
   })
 
