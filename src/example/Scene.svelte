@@ -4,6 +4,7 @@
   import { OrbitControls, AudioListener, interactivity, Environment, Float } from '@threlte/extras'
   import { Debug } from '@threlte/rapier'
   import { Euler, Vector3 } from 'three'
+  import { Sky } from '@threlte/extras'
 
   import Particle from './Particle.svelte'
   import Ground from './Ground.svelte'
@@ -106,12 +107,14 @@
   groundProjection={{ radius: 40, height: 5, scale: { x: 100, y: 100, z: 100 } }}
 />-->
 
-<!-- Equirectangular jpg envmap -->
+<!-- Equirectangular jpg envmap 
 <Environment
   path="../static/assets/"
   files="bg rock.jpg"
   isBackground={true}
 />
+-->
+<Sky elevation={2} />
 
 
 <T.PerspectiveCamera

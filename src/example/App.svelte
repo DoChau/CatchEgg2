@@ -2,7 +2,6 @@
   import { Canvas } from '@threlte/core'
   import { HTML, Environment } from '@threlte/extras'
   import { World } from '@threlte/rapier'
-  import { muted } from './Particle.svelte'
   import Scene from './Scene.svelte'
 
 	type State = 'start' | 'playing' | 'paused' | 'won' | 'lost'
