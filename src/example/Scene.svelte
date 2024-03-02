@@ -143,8 +143,6 @@
 
 <Debug/>
 
-<Ground/>
-
 <!--Drop fake Egg-->
 <Float
   speed={5}
