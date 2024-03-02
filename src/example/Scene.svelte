@@ -16,6 +16,21 @@
   
   import Stars from './Stars.svelte'
 
+  
+  //Float
+  import { Float, Grid, useGltf } from '@threlte/extras'
+  import type { Mesh } from 'three'
+  import Blob from './Blob.svelte'
+  type Nodes = 'ball-1' | 'ball-2' | 'ball-3' | 'ball-4' | 'ball-5'
+
+  const gltf = useGltf<{
+    nodes: Record<Nodes, Mesh>
+    materials: {}
+  }>('/static/assets/cute_bunny.glb', {
+    useDraco: true
+  })
+
+
   //Drop the Easter Egg
   const getId = () => {
     return Math.random().toString(16).slice(2)
@@ -58,17 +73,26 @@
 	}
   //End of drop Easter Egg
 </script>
+<Environment
+  path="/hdr/"
+  files="shanghai_riverside_1k.hdr"
+/>
 
+<Float
+  rotationIntensity={0.15}
+  rotationSpeed={2}
+>
 <T.PerspectiveCamera
   makeDefault
   position={[10, 10, 10]}
 >
   <OrbitControls 
     enableZoom={false}
-    enableRotate={false} 
+    enableRotate={true} 
   />
   <AudioListener />
 </T.PerspectiveCamera>
+</Float>
 
 <T.DirectionalLight
   intensity={2}
@@ -76,16 +100,27 @@
   castShadow
   shadow.bias={-0.0001}
 />
+<T.AmbientLight intensity={0.3} />
 
-<T.GridHelper args={[10]} />
+<Grid
+  position.y={-10}
+  sectionThickness={1}
+  infiniteGrid
+  cellColor="#dddddd"
+  sectionColor="#ffffff"
+  sectionSize={10}
+  cellSize={2}
+/>
 
-<Ground />
 
-<Debug />
+{#if $gltf}
+  {#each Object.values($gltf.nodes) as node}
+    {#if node.geometry}
+      <Blob geometry={node.geometry} />
+    {/if}
+  {/each}
+{/if}
 
-<Emitter />
-
-<Stars/>
 
 {#if !isDelay}
   <Particle on:click={catched}

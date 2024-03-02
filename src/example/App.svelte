@@ -96,15 +96,7 @@
   <div>
     <Canvas>
       <World>
-							
-				<!-- Equirectangular jpg envmap 
-				<Environment
-					path="./static/assets/"
-					files="bg.jpg"
-					isBackground={true}
-					groundProjection={{ radius: 200, height: 50, scale: { x: 100, y: 100, z: 100 } }}
-				/>
-				-->
+		
         <Scene on:won = {(e) => {gameWon()}} />
 
         <HTML
@@ -141,8 +133,7 @@
   div {
     width: 100vw;
     height: 100vh;
-    background: rgb(13, 19, 32);
-    background: linear-gradient(180deg, rgba(13, 19, 32, 1) 0%, rgba(8, 12, 21, 1) 100%);
+    background: rgb(255, 255, 255);
   }
 
 	.progress{

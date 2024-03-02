@@ -27,7 +27,7 @@ Title: Glass Bunny
       geometry={gltf.nodes.Object_2.geometry}
       material={gltf.materials.material_0}
       rotation={[-Math.PI / 2, 0, 0]}
-      scale={10}
+      scale={100}
     />
   {:catch error}
     <slot name="error" {error} />

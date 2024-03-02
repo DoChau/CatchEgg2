@@ -5,12 +5,11 @@
 
 </script>
 
-<T.Group position={[-3, -1, 0]}>
+<T.Group position={[0, 0, 0]}>
   <AutoColliders shape={'cuboid'}>
     <T.Mesh receiveShadow>
       <!----><T.BoxGeometry args={[10, -1, 10]} />
       <T.MeshStandardMaterial />
-      <Picnic />
     </T.Mesh>  
   </AutoColliders>
 </T.Group>
