@@ -7,7 +7,7 @@ Source: https://sketchfab.com/3d-models/easter-egg-with-flower-2666487372854a83a
 Title: Easter egg with flower
 -->
 
-<script>
+<script lang="ts">
   import { Group } from 'three'
   import { T, forwardEventHandlers } from '@threlte/core'
   import { useGltf } from '@threlte/extras'
@@ -17,6 +17,21 @@ Title: Easter egg with flower
   const gltf = useGltf('/static/assets/egg.glb')
 
   const component = forwardEventHandlers()
+
+  import { Color, MeshPhysicalMaterial, type BufferGeometry } from 'three'
+  import { onDestroy } from 'svelte'
+  const red = new Color(0xfe3d00)
+  const blue = new Color(0x0000ff)
+  let material = new MeshPhysicalMaterial({
+    color: red,
+    reflectivity: 1,
+    metalness: 0.9,
+    roughness: 0.2
+  })
+  onDestroy(() => {
+    material.dispose()
+  })
+
 </script>
 
 <T is={ref} dispose={false} {...$$restProps} bind:this={$component}>
@@ -26,7 +41,7 @@ Title: Easter egg with flower
     <T.Group scale={0.01}>
       <T.Mesh
         geometry={gltf.nodes.Sphere_Material001_0.geometry}
-        material={gltf.materials['Material.001']}
+        material={material}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={90}
       />

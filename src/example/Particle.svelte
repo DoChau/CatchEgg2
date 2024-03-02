@@ -14,7 +14,7 @@
   import { Collider, RigidBody, type ContactEvent } from '@threlte/rapier'
   import { writable } from 'svelte/store'
   import type { Euler, Vector3 } from 'three'
-  import { BoxGeometry, MeshStandardMaterial } from 'three'
+  import { BoxGeometry, MeshStandardMaterial, Group } from 'three'
   import { clamp } from 'three/src/math/MathUtils'
   import Egg from '$lib/egg.svelte'
   const dispatchingComponent = forwardEventHandlers()
@@ -22,7 +22,8 @@
   export let position: Vector3 | undefined = undefined
   export let rotation: Euler | undefined = undefined
   
-  
+  //for rendering Eggs
+  export const ref = new Group()
 
   const audios: {
     threshold: number
@@ -53,6 +54,7 @@
 </script>
 
 <T.Group bind:this={$dispatchingComponent}
+  
   position={position?.toArray()}
   rotation={rotationCasted}
 >

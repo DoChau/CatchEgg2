@@ -5,7 +5,6 @@
   import { muted } from './Particle.svelte'
   import Scene from './Scene.svelte'
   import { Pane, Button } from 'svelte-tweakpane-ui'
-  import { emoji } from './emoji.ts'
 
 	type State = 'start' | 'playing' | 'paused' | 'won' | 'lost'
 
@@ -106,7 +105,6 @@
 					groundProjection={{ radius: 200, height: 50, scale: { x: 100, y: 100, z: 100 } }}
 				/>
 				-->
-				
         <Scene on:won = {(e) => {gameWon()}} />
 
         <HTML

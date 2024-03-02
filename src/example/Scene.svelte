@@ -8,13 +8,15 @@
   import Particle from './Particle.svelte'
   import Emitter from './Emitter.svelte'
   import Ground from './Ground.svelte'
-
   let dispatch = createEventDispatcher()
   const catched = () => {
         dispatch('won')
     }
-
   const { target } = interactivity()
+  
+  import Stars from './Stars.svelte'
+
+  //Drop the Easter Egg
   const getId = () => {
     return Math.random().toString(16).slice(2)
   }
@@ -54,6 +56,7 @@
 			clearInterval(timer)
 		}
 	}
+  //End of drop Easter Egg
 </script>
 
 <T.PerspectiveCamera
@@ -68,8 +71,10 @@
 </T.PerspectiveCamera>
 
 <T.DirectionalLight
+  intensity={2}
+  position={[10, 10, 10]}
   castShadow
-  position={[8, 20, -3]}
+  shadow.bias={-0.0001}
 />
 
 <T.GridHelper args={[10]} />
@@ -79,6 +84,8 @@
 <Debug />
 
 <Emitter />
+
+<Stars/>
 
 {#if !isDelay}
   <Particle on:click={catched}
