@@ -114,8 +114,10 @@
   isBackground={true}
 />
 -->
+
 <Sky elevation={2} />
 
+<Ground/>
 
 <T.PerspectiveCamera
   makeDefault
@@ -168,3 +170,4 @@
       />
   {/if}
 </Float>
+

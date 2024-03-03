@@ -1,16 +1,16 @@
 <script lang="ts">
   import { T, useFrame } from '@threlte/core'
-  import { AutoColliders } from '@threlte/rapier'
+  import { useTexture } from '@threlte/extras'
+
   import Picnic from '$lib/moai_mountain.svelte'
 
+  const map = useTexture('texture.png')
+// position={[-650, -30, -900]} for Moai terrain
 </script>
 
-<T.Group position={[-650, -30, -900]} rotation={[0, 0, 0]}>
-  <AutoColliders shape={'cuboid'}>
-    <T.Mesh receiveShadow>
-      <!--<T.BoxGeometry args={[10, -1, 10]} />-->
-      <Picnic/>
-      <T.MeshStandardMaterial />
-    </T.Mesh>  
-  </AutoColliders>
+<T.Group position={[0, 0, -10]} rotation={[0, 0, 0]}>
+  <T.Mesh receiveShadow>
+    <T.BoxGeometry args={[100, 100, 1]} />
+    <T.MeshStandardMaterial />
+  </T.Mesh>    
 </T.Group>
