@@ -4,13 +4,15 @@
 
   import Picnic from '$lib/moai_mountain.svelte'
 
-  const map = useTexture('texture.png')
+  const map = useTexture('../static/assets/bg rock1.jpg')
 // position={[-650, -30, -900]} for Moai terrain
 </script>
 
-<T.Group position={[0, 0, -10]} rotation={[0, 0, 0]}>
-  <T.Mesh receiveShadow>
-    <T.BoxGeometry args={[100, 100, 1]} />
-    <T.MeshStandardMaterial />
-  </T.Mesh>    
-</T.Group>
+{#await map then value}
+  <T.Group position={[0, 0, -10]} rotation={[0, 0, 0]}>
+    <T.Mesh receiveShadow>
+      <T.BoxGeometry args={[60, 90, 1]} />
+      <T.MeshBasicMaterial map={value} />
+    </T.Mesh>    
+  </T.Group>
+{/await}

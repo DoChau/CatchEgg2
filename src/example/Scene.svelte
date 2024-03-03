@@ -15,7 +15,7 @@
         dispatch('won')
     }
   const miss = () => {
-        dispatch2('lose')
+        dispatch2('lost')
     }
   const { target } = interactivity()
   
@@ -26,7 +26,7 @@
   }
 
   const getRandomPosition = () => {
-    return new Vector3((Math.random()-0.5)*60, (Math.random()-0.5)*30 , 0)
+    return new Vector3((Math.random()-0.5)*40, (Math.random()-0.5)*30 , 0)
   }
 
   const getRandomRotation = () => {
@@ -38,11 +38,11 @@
       position: Vector3
       rotation: Euler
     }
-  let size = 12
+
   let bodies: Body[] = []
   let lastBodyMounted: number = 0
-  let bodyEveryMilliseconds = 1000
-  let longevityMilliseconds = 8000
+  let bodyEveryMilliseconds = 500
+  let longevityMilliseconds = 3000
 
   const body: Body = {
         id: getId(),
