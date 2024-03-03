@@ -51,7 +51,7 @@
       }
 
   let timer = null
-  let countdown = (Math.random()*(10-0 + 1))+0
+  let countdown = (Math.random()*(13-8 + 0))+8
   let isDelay = true
 	onMount(() => {
     console.log ({countdown})
@@ -60,12 +60,11 @@
 	  }, 1000)
 	})
 
-	$: {
-    if (countdown < 1) {
+	$: if (countdown < 1) {
       isDelay = false
 			clearInterval(timer)
 		}
-	}
+	
   //End of drop Easter Egg
 
   //Create fake Egg
@@ -159,9 +158,9 @@
 
 <!--Drop prize Egg-->
 <Float
-  speed={5}
+  speed={6}
   floatIntensity={1}
-  floatingRange={[-3, 3]}   
+  floatingRange={[-2, 2]}   
   >
   {#if !isDelay}
     <Particle on:click={catched}

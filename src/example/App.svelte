@@ -53,8 +53,6 @@
 </script>
 
 
-<svelte:window on:keydown={pauseGame} />
-
 {#if state === 'start'}
 	<h1>Egg Catching Game</h1>
 	<button on:click={() => (state = 'playing')}>Play</button>
